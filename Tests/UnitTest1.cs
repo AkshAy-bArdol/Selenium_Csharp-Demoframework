@@ -59,6 +59,7 @@ namespace SeleniumCsharpDemoFramework.Tests
             Thread.Sleep(3000);
             String actualerrorMessage = driver.Value.FindElement(By.CssSelector(".form div strong")).Text;
             TestContext.Progress.WriteLine(actualerrorMessage);
+            TestContext.Progress.WriteLine(actualerrorMessage);
             Assert.AreEqual("Incorrect", actualerrorMessage);
 
         }
