@@ -118,7 +118,7 @@ namespace SeleniumCsharpDemoFramework.Utilities
             MailMessage message = new MailMessage();
             message.To.Add("bardolakshay@gmail.com");
             message.From = new MailAddress("akshay.b@simformsolutions.com"); // Set the "From" address
-            message.Subject = "Test Automation Report";
+            message.Subject = "Test Automation Report (by Akshay Bardol)";
             message.Body = "Please find attached the latest test report.";
 
             // Attach the Extent Report to the email message
