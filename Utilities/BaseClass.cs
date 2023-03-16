@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +22,7 @@ namespace SeleniumCsharpDemoFramework.Utilities
         //public IWebDriver driver;
         public ExtentReports extent;
         public ExtentTest test;
+        String reportPath;
         String browserName;
         //reports
         [OneTimeSetUp]
@@ -27,7 +30,7 @@ namespace SeleniumCsharpDemoFramework.Utilities
         {
             String workingDirectory = Environment.CurrentDirectory;
             String projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-            String reportPath = projectDirectory + "//index.html";
+             reportPath = projectDirectory + "//index.html";
             var htmlReporter = new ExtentHtmlReporter(reportPath);
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
@@ -42,10 +45,10 @@ namespace SeleniumCsharpDemoFramework.Utilities
         {
             test = extent.CreateTest(TestContext.CurrentContext.Test.Name);
             //Configuration
-             browserName = TestContext.Parameters["browserName"];
+            browserName = TestContext.Parameters["browserName"];
             if (browserName == null)
             {
-                 browserName = ConfigurationManager.AppSettings["browser"];
+                browserName = ConfigurationManager.AppSettings["browser"];
             }
             InitBrowser(browserName);
             driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
@@ -88,12 +91,12 @@ namespace SeleniumCsharpDemoFramework.Utilities
 
             DateTime time = DateTime.Now;
             String fileName = "Screenshot_" + time.ToString("h_mm_ss") + ".png";
-            if(status == TestStatus.Failed)
+            if (status == TestStatus.Failed)
             {
-                test.Fail("Test Failed",captureScreenShot(driver.Value,fileName));
+                test.Fail("Test Failed", captureScreenShot(driver.Value, fileName));
                 test.Log(Status.Fail, "test failed with logtrace" + stackTrace);
             }
-            else if(status == TestStatus.Passed)
+            else if (status == TestStatus.Passed)
             {
 
             }
@@ -101,12 +104,40 @@ namespace SeleniumCsharpDemoFramework.Utilities
             driver.Value.Quit();
         }
 
-        public MediaEntityModelProvider captureScreenShot(IWebDriver driver,String screenShotName)
+        public MediaEntityModelProvider captureScreenShot(IWebDriver driver, String screenShotName)
         {
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             var screenshot = ts.GetScreenshot().AsBase64EncodedString;
 
-           return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
         }
+        [OneTimeTearDown]
+        public void SendEmail()
+        {
+            // Create the email message
+            MailMessage message = new MailMessage();
+            message.To.Add("bardolakshay@gmail.com");
+            message.From = new MailAddress("akshay.b@simformsolutions.com"); // Set the "From" address
+            message.Subject = "Test Automation Report";
+            message.Body = "Please find attached the latest test report.";
+
+            // Attach the Extent Report to the email message
+            Attachment attachment = new Attachment(reportPath);
+            message.Attachments.Add(attachment);
+
+            // Set the email credentials and SMTP server details
+            SmtpClient client = new SmtpClient();
+            client.Host = "smtp.office365.com";
+            client.Port = 587;
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("akshay.b@simformsolutions.com", "s8o?Utubr");
+            client.EnableSsl = true;
+
+            // Send the email
+            client.Send(message);
+        }
+
     }
 }
+
+
