@@ -13,9 +13,9 @@ namespace SeleniumCsharpDemoFramework.PageObjects
         }
 
 
-        By userName = By.Id("username");
-        By password = By.Id("password");
-        By checkBox = By.XPath("//div[@class='form-group'][5]/label/span/input");
+        By userName     = By.Id("username");
+        By password     = By.Id("password");
+        By checkBox     = By.XPath("//div[@class='form-group'][5]/label/span/input");
         By signInButton = By.CssSelector("#signInBtn");
 
         public ProductsPage validLogin(String user,String pass)
