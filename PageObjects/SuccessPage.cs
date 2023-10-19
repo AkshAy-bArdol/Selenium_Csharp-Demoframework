@@ -19,24 +19,30 @@ namespace SeleniumCsharpDemoFramework.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.Id, Using = "country")]
-        private IWebElement location;
+        /*        [FindsBy(How = How.Id, Using = "country")]
+                private IWebElement location;
 
-        [FindsBy(How = How.LinkText, Using = "India")]
-        private IWebElement country;
+                [FindsBy(How = How.LinkText, Using = "India")]
+                private IWebElement country;
 
-        [FindsBy(How = How.XPath, Using = "//label[@for='checkbox2']")]
-        private IWebElement checkBox;
+                [FindsBy(How = How.XPath, Using = "//label[@for='checkbox2']")]
+                private IWebElement checkBox;
 
-        [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
-        private IWebElement purchase;
+                [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
+                private IWebElement purchase;
 
-        [FindsBy(How = How.CssSelector, Using = ".alert-success")]
-        private IWebElement successMsg;
+                [FindsBy(How = How.CssSelector, Using = ".alert-success")]
+                private IWebElement successMsg;*/
+
+        By location = By.Id("country");
+        By country = By.LinkText("India");
+        By checkBox = By.XPath("//label[@for='checkbox2']");
+        By purchase = By.XPath("//input[@type='submit']");
+        By successMsg = By.CssSelector(".alert-success");
 
         public void sendcountryInitials()
         {
-            location.SendKeys("Ind");
+            driver.FindElement(location).SendKeys("Ind");
         }
         public void waitForDisplay()
         {
@@ -46,24 +52,24 @@ namespace SeleniumCsharpDemoFramework.PageObjects
 
         public void selectCountry()
         {
-            country.Click();
+            driver.FindElement(country).Click();
         }
 
         public void selectCheckbox()
         {
-            checkBox.Click();
+            driver.FindElement(checkBox).Click();
         }
 
         public void clickOnPurchase()
         {
-            purchase.Click();
+            driver.FindElement(purchase).Click();
         }
 
         public String getSuccessMsg()
         {
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(8));
             wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.CssSelector(".alert-success")));
-            return successMsg.Text;
+            return driver.FindElement(successMsg).Text;
         }
 
 

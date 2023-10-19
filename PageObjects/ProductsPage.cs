@@ -21,11 +21,14 @@ namespace SeleniumCsharpDemoFramework.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.TagName, Using = "app-card")]
-        private IList<IWebElement> cards;
+        /*        [FindsBy(How = How.TagName, Using = "app-card")]
+                private IList<IWebElement> cards;
 
-        [FindsBy(How = How.PartialLinkText, Using = "Checkout")]
-        private IWebElement checkOutButton;
+                [FindsBy(How = How.PartialLinkText, Using = "Checkout")]
+                private IWebElement checkOutButton;*/
+
+        By cards = By.TagName("app-card");
+        By checkOutButton = By.PartialLinkText("Checkout");
 
         public void waitForCheckOutDisplay()
         {
@@ -35,7 +38,7 @@ namespace SeleniumCsharpDemoFramework.PageObjects
 
         public IList<IWebElement> getCards()
         {
-            return cards;
+            return driver.FindElements(cards);
         }
 
         public By getCardTitle()
@@ -49,7 +52,7 @@ namespace SeleniumCsharpDemoFramework.PageObjects
         }
         public CheckoutPage checkOut()
         {
-            checkOutButton.Click();
+            driver.FindElement(checkOutButton).Click();
             return new CheckoutPage(driver);
         }
     }

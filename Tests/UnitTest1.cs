@@ -34,7 +34,7 @@ namespace SeleniumCsharpDemoFramework.Tests
             {
                 actualProducts[i] = checkoutCards[i].Text;
             }
-            Assert.AreEqual(expectedProducts,actualProducts);
+            Assert.That(actualProducts, Is.EqualTo(expectedProducts));
 
             SuccessPage successPage=checkoutPage.checkOut();
             successPage.sendcountryInitials();
@@ -60,7 +60,7 @@ namespace SeleniumCsharpDemoFramework.Tests
             String actualerrorMessage = driver.Value.FindElement(By.CssSelector(".form div strong")).Text;
             TestContext.Progress.WriteLine(actualerrorMessage);
             TestContext.Progress.WriteLine(actualerrorMessage);
-            Assert.AreEqual("Incorrect", actualerrorMessage);
+            Assert.That(actualerrorMessage, Is.EqualTo("Incorrect"));
 
         }
 
