@@ -12,19 +12,6 @@ namespace SeleniumCsharpDemoFramework.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        //pageobject factory //div[@class='form-group'][5]/label/span/input
-
-        /*        [FindsBy(How = How.Id, Using = "username")]
-                private IWebElement userName;
-
-                [FindsBy(How = How.Id, Using = "password")]
-                private IWebElement password;
-
-                [FindsBy(How = How.XPath, Using = "//div[@class='form-group'][5]/label/span/input")]
-                private IWebElement checkBox;
-
-                [FindsBy(How = How.CssSelector, Using = "#signInBtn")]
-                private IWebElement signInButton;*/
 
         By userName = By.Id("username");
         By password = By.Id("password");

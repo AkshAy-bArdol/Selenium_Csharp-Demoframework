@@ -34,6 +34,7 @@ namespace SeleniumCsharpDemoFramework.Tests
             {
                 actualProducts[i] = checkoutCards[i].Text;
             }
+
             Assert.That(actualProducts, Is.EqualTo(expectedProducts));
 
             SuccessPage successPage=checkoutPage.checkOut();
