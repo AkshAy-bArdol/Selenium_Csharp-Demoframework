@@ -20,10 +20,10 @@ namespace SeleniumCsharpDemoFramework.PageObjects
         }
 
 
-        By location = By.Id("country");
-        By country = By.LinkText("India");
-        By checkBox = By.XPath("//label[@for='checkbox2']");
-        By purchase = By.XPath("//input[@type='submit']");
+        By location   = By.Id("country");
+        By country    = By.LinkText("India");
+        By checkBox   = By.XPath("//label[@for='checkbox2']");
+        By purchase   = By.XPath("//input[@type='submit']");
         By successMsg = By.CssSelector(".alert-success");
 
         public void sendcountryInitials()
