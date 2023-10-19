@@ -14,24 +14,29 @@ namespace SeleniumCsharpDemoFramework.PageObjects
 
         //pageobject factory //div[@class='form-group'][5]/label/span/input
 
-        [FindsBy(How = How.Id, Using = "username")]
-        private IWebElement userName;
+        /*        [FindsBy(How = How.Id, Using = "username")]
+                private IWebElement userName;
 
-        [FindsBy(How = How.Id, Using = "password")]
-        private IWebElement password;
+                [FindsBy(How = How.Id, Using = "password")]
+                private IWebElement password;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='form-group'][5]/label/span/input")]
-        private IWebElement checkBox;
+                [FindsBy(How = How.XPath, Using = "//div[@class='form-group'][5]/label/span/input")]
+                private IWebElement checkBox;
 
-        [FindsBy(How = How.CssSelector, Using = "#signInBtn")]
-        private IWebElement signInButton;
+                [FindsBy(How = How.CssSelector, Using = "#signInBtn")]
+                private IWebElement signInButton;*/
+
+        By userName = By.Id("username");
+        By password = By.Id("password");
+        By checkBox = By.XPath("//div[@class='form-group'][5]/label/span/input");
+        By signInButton = By.CssSelector("#signInBtn");
 
         public ProductsPage validLogin(String user,String pass)
         {
-            userName.SendKeys(user);
-            password.SendKeys(pass);
-            checkBox.Click();
-            signInButton.Click();
+            driver.FindElement(userName).SendKeys(user);
+            driver.FindElement(password).SendKeys(pass);
+            driver.FindElement(checkBox).Click();
+            driver.FindElement(signInButton).Click();
             return new ProductsPage(driver);
         }
 

@@ -15,6 +15,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace SeleniumCsharpDemoFramework.Utilities
 {
     public class BaseClass
@@ -24,13 +25,13 @@ namespace SeleniumCsharpDemoFramework.Utilities
         public ExtentTest test;
         String reportPath;
         String browserName;
-        //reports
+
         [OneTimeSetUp]
         public void SetUp()
         {
             String workingDirectory = Environment.CurrentDirectory;
             String projectDirectory = Directory.GetParent(workingDirectory).Parent.Parent.FullName;
-             reportPath = projectDirectory + "//index.html";
+            reportPath = projectDirectory + "//index.html";
             var htmlReporter = new ExtentHtmlReporter(reportPath);
             extent = new ExtentReports();
             extent.AttachReporter(htmlReporter);
@@ -39,7 +40,7 @@ namespace SeleniumCsharpDemoFramework.Utilities
             extent.AddSystemInfo("Username", "Akshay");
         }
 
-        public ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
+        public ThreadLocal<IWebDriver> driver = new();
         [SetUp]
         public void StartBrowser()
         {
@@ -108,7 +109,6 @@ namespace SeleniumCsharpDemoFramework.Utilities
         {
             ITakesScreenshot ts = (ITakesScreenshot)driver;
             var screenshot = ts.GetScreenshot().AsBase64EncodedString;
-
             return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot, screenShotName).Build();
         }
         [OneTimeTearDown]
