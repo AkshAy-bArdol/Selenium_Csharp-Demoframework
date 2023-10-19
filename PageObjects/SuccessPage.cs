@@ -19,20 +19,6 @@ namespace SeleniumCsharpDemoFramework.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        /*        [FindsBy(How = How.Id, Using = "country")]
-                private IWebElement location;
-
-                [FindsBy(How = How.LinkText, Using = "India")]
-                private IWebElement country;
-
-                [FindsBy(How = How.XPath, Using = "//label[@for='checkbox2']")]
-                private IWebElement checkBox;
-
-                [FindsBy(How = How.XPath, Using = "//input[@type='submit']")]
-                private IWebElement purchase;
-
-                [FindsBy(How = How.CssSelector, Using = ".alert-success")]
-                private IWebElement successMsg;*/
 
         By location = By.Id("country");
         By country = By.LinkText("India");

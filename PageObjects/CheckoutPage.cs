@@ -17,12 +17,6 @@ namespace SeleniumCsharpDemoFramework.PageObjects
             PageFactory.InitElements(driver, this);
         }
 
-        /*        [FindsBy(How = How.CssSelector, Using = "h4 a")]
-                private IList<IWebElement> checkoutCards;
-
-                [FindsBy(How = How.CssSelector, Using = ".btn-success")]
-                private IWebElement checkOutButton;*/
-
         By checkoutCards = By.CssSelector("h4 a");
         By checkOutButton = By.CssSelector(".btn-success");
 
