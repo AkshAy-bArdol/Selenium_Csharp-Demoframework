@@ -130,7 +130,7 @@ namespace SeleniumCsharpDemoFramework.Utilities
             client.Host = "smtp.office365.com";
             client.Port = 587;
             client.UseDefaultCredentials = false;
-            client.Credentials = new NetworkCredential("akshay.b@simformsolutions.com", "s8o?Utubr");
+            client.Credentials = new NetworkCredential("akshay.b@simformsolutions.com", "password");
             client.EnableSsl = true;
 
             // Send the email
